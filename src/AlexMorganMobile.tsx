@@ -1,9 +1,12 @@
 import { useState } from "react"
 
-const assetPathPrefix = "/assets/alex-mobile"
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`
+const assetPathPrefix = `${base}assets/alex-mobile`
 const imgRibbonSculpture = `${assetPathPrefix}/e7e0a.png`
-const imgEditorialPhotograph = "/image.png"
-const imgEditorialPhotograph1 = "/codebase-visualization-cover.svg"
+const imgEditorialPhotograph = `${base}image.png`
+const imgEditorialPhotograph1 = `${base}codebase-visualization-cover.svg`
 const imgAuraGroundPreview = `${assetPathPrefix}/8e38a.png`
 const imgEditorialPhotograph2 = `${assetPathPrefix}/970ac.png`
 const imgMenu = `${assetPathPrefix}/a4133.svg`
@@ -21,7 +24,7 @@ export default function AlexMorganMobilePortfolio() {
       data-name="Pranav Dharwadkar — Mobile portfolio"
     >
       <div
-        className="content-stretch flex flex-col items-start overflow-clip px-[24px] relative shrink-0 w-full min-h-screen max-h-screen"
+        className="content-stretch flex flex-col items-start overflow-clip px-[24px] relative shrink-0 w-full min-h-screen"
         data-node-id="1:3"
         data-name="Introduction"
       >
@@ -118,7 +121,7 @@ export default function AlexMorganMobilePortfolio() {
           </p>
         </div>
         <div
-          className="content-stretch flex flex-col flex-1 min-h-0 items-start overflow-clip relative shrink-0 w-full"
+          className="content-stretch flex flex-col min-h-[580px] items-start relative shrink-0 w-full"
           data-node-id="1:13"
           data-name="Hero composition"
         >
@@ -129,24 +132,31 @@ export default function AlexMorganMobilePortfolio() {
             A little curious.
           </p>
           <p
-            className="[word-break:break-word] absolute font-['Bodoni_Moda:Italic'] font-normal italic leading-[1.02] left-0 text-[#242522] text-[54px] top-[14%] tracking-[-3px] w-[342px]"
+            className="[word-break:break-word] absolute font-['Bodoni_Moda:Italic'] font-normal italic leading-[1.02] left-0 text-[#242522] text-[54px] top-[60px] tracking-[-3px] w-[342px]"
             data-node-id="1:15"
           >
             A lot of possibility.
           </p>
           <div
-            className="absolute h-[38%] left-[6%] top-[32%] w-[85%]"
+            className="absolute h-[240px] left-[10px] top-[150px] w-[280px] pointer-events-none z-10"
             data-node-id="1:16"
             data-name="Ribbon sculpture"
           >
             <img
-              alt=""
-              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+              alt="Metallic ribbon sculpture"
+              className="absolute inset-0 max-w-none object-contain pointer-events-none size-full"
               src={imgRibbonSculpture}
+              onError={(e) => {
+                const el = e.currentTarget
+                if (!el.dataset.fallback) {
+                  el.dataset.fallback = "1"
+                  el.src = "/assets/alex-mobile/e7e0a.png"
+                }
+              }}
             />
           </div>
           <div
-            className="absolute content-stretch flex flex-col gap-[20px] items-start left-0 overflow-clip top-[68%] w-[310px]"
+            className="absolute content-stretch flex flex-col gap-[20px] items-start left-0 top-[390px] w-full max-w-[320px]"
             data-node-id="1:17"
             data-name="Personal introduction"
           >
@@ -279,6 +289,13 @@ export default function AlexMorganMobilePortfolio() {
                 alt="Pranav Dharwadkar portrait"
                 className="absolute inset-0 max-w-none object-cover object-top pointer-events-none size-full"
                 src={imgEditorialPhotograph}
+                onError={(e) => {
+                  const el = e.currentTarget
+                  if (!el.dataset.fallback) {
+                    el.dataset.fallback = "1"
+                    el.src = "/image.png"
+                  }
+                }}
               />
             </div>
             <div

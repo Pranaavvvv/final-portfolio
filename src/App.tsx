@@ -103,9 +103,6 @@ function useParallax() {
     const ribbons = document.querySelectorAll<HTMLElement>(
       '[data-name="Ribbon sculpture"]',
     )
-    const heroComps = document.querySelectorAll<HTMLElement>(
-      '[data-name="Hero composition"]',
-    )
 
     let ticking = false
     const onScroll = () => {
@@ -113,15 +110,8 @@ function useParallax() {
       ticking = true
       requestAnimationFrame(() => {
         const scrollY = window.scrollY
-        // Parallax on the ribbon sculpture — moves slower than scroll
         ribbons.forEach((el) => {
           el.style.transform = `translateY(${scrollY * 0.12}px)`
-        })
-        // Subtle fade-out of the hero as user scrolls down
-        heroComps.forEach((el) => {
-          const fade = Math.max(0, 1 - scrollY / 900)
-          el.style.opacity = String(fade)
-          el.style.transform = `translateY(${scrollY * 0.05}px)`
         })
         ticking = false
       })
@@ -132,7 +122,7 @@ function useParallax() {
   }, [])
 }
 
-/* ── Section scroll-triggered reveals (smooth scale + fade) ── */
+/* ── Section scroll-triggered reveals ── */
 function useSectionScrollEffects() {
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -140,10 +130,9 @@ function useSectionScrollEffects() {
     ).matches
     if (prefersReduced) return
 
-    // Add scroll-section class to all major sections
     const sectionIds = [
-      "about", "work", "hackathons", "skills", "process", "playground", "notes", "contact",
-      "mobile-about", "mobile-work", "mobile-hackathons", "mobile-skills",
+      "work", "hackathons", "skills", "process", "playground", "notes", "contact",
+      "mobile-work", "mobile-hackathons", "mobile-skills",
       "mobile-process", "mobile-playground", "mobile-notes", "mobile-contact",
     ]
     sectionIds.forEach((id) => {
@@ -159,7 +148,7 @@ function useSectionScrollEffects() {
           }
         })
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+      { rootMargin: "0px 0px -4% 0px", threshold: 0.02 },
     )
 
     document.querySelectorAll(".scroll-section").forEach((el) => observer.observe(el))

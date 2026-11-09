@@ -1,7 +1,10 @@
-const assetPathPrefix = "/assets/alex-desktop"
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`
+const assetPathPrefix = `${base}assets/alex-desktop`
 const imgRibbonSculpture = `${assetPathPrefix}/a1df2.png`
-const imgEditorialPhotograph = "/image.png"
-const imgEditorialPhotograph1 = "/codebase-visualization-cover.svg"
+const imgEditorialPhotograph = `${base}image.png`
+const imgEditorialPhotograph1 = `${base}codebase-visualization-cover.svg`
 const imgAuraGroundPreview = `${assetPathPrefix}/a4f17.png`
 const imgEditorialPhotograph2 = `${assetPathPrefix}/f7cda.png`
 const imgArrowUpRight = `${assetPathPrefix}/88ae1.svg`
@@ -18,7 +21,7 @@ export default function AlexMorganDesktopPortfolio() {
       data-name="Pranav Dharwadkar — Desktop portfolio"
     >
       <div
-        className="content-stretch flex flex-col items-start overflow-clip px-[72px] relative shrink-0 w-full min-h-screen max-h-screen"
+        className="content-stretch flex flex-col items-start overflow-clip px-[72px] relative shrink-0 w-full min-h-screen"
         data-node-id="1:342"
         data-name="Introduction"
       >
@@ -120,35 +123,42 @@ export default function AlexMorganDesktopPortfolio() {
           </p>
         </div>
         <div
-          className="content-stretch flex flex-col flex-1 min-h-0 items-start overflow-clip relative shrink-0 w-full"
+          className="content-stretch flex flex-col flex-1 min-h-[560px] items-start relative shrink-0 w-full"
           data-node-id="1:359"
           data-name="Hero composition"
         >
           <p
-            className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0.98] left-0 not-italic right-0 text-[#242522] text-[clamp(80px,10vw,154px)] top-0 tracking-[-10px]"
+            className="[word-break:break-word] absolute font-['Inter:Regular'] font-normal leading-[0.98] left-0 not-italic right-0 text-[#242522] text-[clamp(72px,9vw,154px)] top-0 tracking-[-6px]"
             data-node-id="1:360"
           >
             A little curious.
           </p>
           <p
-            className="[word-break:break-word] absolute font-['Bodoni_Moda:Italic'] font-normal italic leading-[1.02] left-[48px] text-[#242522] text-[clamp(80px,10.1vw,155px)] top-[24%] tracking-[-7px] w-[80%]"
+            className="[word-break:break-word] absolute font-['Bodoni_Moda:Italic'] font-normal italic leading-[1.02] left-[48px] text-[#242522] text-[clamp(72px,9vw,155px)] top-[150px] tracking-[-5px] w-[80%]"
             data-node-id="1:361"
           >
             A lot of possibility.
           </p>
           <div
-            className="absolute h-[44%] left-[55%] top-[50%] w-[42%]"
+            className="absolute h-[320px] right-0 top-[220px] w-[560px] max-w-[48%] pointer-events-none z-10"
             data-node-id="1:362"
             data-name="Ribbon sculpture"
           >
             <img
-              alt=""
-              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+              alt="Metallic ribbon sculpture"
+              className="absolute inset-0 max-w-none object-contain pointer-events-none size-full"
               src={imgRibbonSculpture}
+              onError={(e) => {
+                const el = e.currentTarget
+                if (!el.dataset.fallback) {
+                  el.dataset.fallback = "1"
+                  el.src = "/assets/alex-desktop/a1df2.png"
+                }
+              }}
             />
           </div>
           <div
-            className="absolute content-stretch flex flex-col gap-[20px] items-start left-0 overflow-clip top-[60%] w-[365px]"
+            className="absolute content-stretch flex flex-col gap-[20px] items-start left-0 top-[340px] w-[365px]"
             data-node-id="1:363"
             data-name="Personal introduction"
           >
@@ -285,6 +295,13 @@ export default function AlexMorganDesktopPortfolio() {
                 alt="Pranav Dharwadkar portrait"
                 className="absolute inset-0 max-w-none object-cover object-top pointer-events-none size-full"
                 src={imgEditorialPhotograph}
+                onError={(e) => {
+                  const el = e.currentTarget
+                  if (!el.dataset.fallback) {
+                    el.dataset.fallback = "1"
+                    el.src = "/image.png"
+                  }
+                }}
               />
             </div>
             <div

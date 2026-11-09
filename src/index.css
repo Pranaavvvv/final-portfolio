@@ -180,10 +180,8 @@ a.nav-active::after {
 /* ═══════════════════════════════════════════
    Parallax Hero (JS sets inline transforms)
    ═══════════════════════════════════════════ */
-[data-name="Ribbon sculpture"],
-[data-name="Hero composition"] {
-  will-change: transform, opacity;
-  transition: none; /* JS handles per-frame updates */
+[data-name="Ribbon sculpture"] {
+  will-change: transform;
 }
 
 .portfolio-desktop {
