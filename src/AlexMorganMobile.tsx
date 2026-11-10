@@ -1,18 +1,13 @@
 import { useState } from "react"
-
-const base = import.meta.env.BASE_URL.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`
-const assetPathPrefix = `${base}assets/alex-mobile`
-const imgRibbonSculpture = `${assetPathPrefix}/e7e0a.png`
-const imgEditorialPhotograph = `${base}image.png`
-const imgEditorialPhotograph1 = `${base}codebase-visualization-cover.svg`
-const imgAuraGroundPreview = `${assetPathPrefix}/8e38a.png`
-const imgEditorialPhotograph2 = `${assetPathPrefix}/970ac.png`
-const imgMenu = `${assetPathPrefix}/a4133.svg`
-const imgArrowUpRight = `${assetPathPrefix}/774e5.svg`
-const imgStatusMarker = `${assetPathPrefix}/0c75b.svg`
-const imgArrowUpRight1 = `${assetPathPrefix}/6933d.svg`
+import imgRibbonSculpture from "./assets/alex-mobile/e7e0a.png"
+import imgEditorialPhotograph from "./assets/image.png"
+import imgEditorialPhotograph1 from "./assets/codebase-visualization-cover.svg"
+import imgAuraGroundPreview from "./assets/alex-mobile/8e38a.png"
+import imgEditorialPhotograph2 from "./assets/alex-mobile/970ac.png"
+import imgMenu from "./assets/alex-mobile/a4133.svg"
+import imgArrowUpRight from "./assets/alex-mobile/774e5.svg"
+import imgStatusMarker from "./assets/alex-mobile/0c75b.svg"
+import imgArrowUpRight1 from "./assets/alex-mobile/6933d.svg"
 
 export default function AlexMorganMobilePortfolio() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -148,9 +143,11 @@ export default function AlexMorganMobilePortfolio() {
               src={imgRibbonSculpture}
               onError={(e) => {
                 const el = e.currentTarget
-                if (!el.dataset.fallback) {
-                  el.dataset.fallback = "1"
-                  el.src = "/assets/alex-mobile/e7e0a.png"
+                const step = Number(el.dataset.fallbackStep || "0")
+                const fallbacks = ["./assets/alex-mobile/e7e0a.png", "/assets/alex-mobile/e7e0a.png", "assets/alex-mobile/e7e0a.png"]
+                if (step < fallbacks.length) {
+                  el.dataset.fallbackStep = String(step + 1)
+                  el.src = fallbacks[step]
                 }
               }}
             />
@@ -291,9 +288,11 @@ export default function AlexMorganMobilePortfolio() {
                 src={imgEditorialPhotograph}
                 onError={(e) => {
                   const el = e.currentTarget
-                  if (!el.dataset.fallback) {
-                    el.dataset.fallback = "1"
-                    el.src = "/image.png"
+                  const step = Number(el.dataset.fallbackStep || "0")
+                  const fallbacks = ["./image.png", "/image.png", "image.png"]
+                  if (step < fallbacks.length) {
+                    el.dataset.fallbackStep = String(step + 1)
+                    el.src = fallbacks[step]
                   }
                 }}
               />

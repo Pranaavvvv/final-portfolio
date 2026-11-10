@@ -1,17 +1,13 @@
-const base = import.meta.env.BASE_URL.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`
-const assetPathPrefix = `${base}assets/alex-desktop`
-const imgRibbonSculpture = `${assetPathPrefix}/a1df2.png`
-const imgEditorialPhotograph = `${base}image.png`
-const imgEditorialPhotograph1 = `${base}codebase-visualization-cover.svg`
-const imgAuraGroundPreview = `${assetPathPrefix}/a4f17.png`
-const imgEditorialPhotograph2 = `${assetPathPrefix}/f7cda.png`
-const imgArrowUpRight = `${assetPathPrefix}/88ae1.svg`
-const imgArrowUpRight1 = `${assetPathPrefix}/774e5.svg`
-const imgStatusMarker = `${assetPathPrefix}/0c75b.svg`
-const imgArrowUpRight2 = `${assetPathPrefix}/6933d.svg`
-const imgArrowUpRight3 = `${assetPathPrefix}/bee23.svg`
+import imgRibbonSculpture from "./assets/alex-desktop/a1df2.png"
+import imgEditorialPhotograph from "./assets/image.png"
+import imgEditorialPhotograph1 from "./assets/codebase-visualization-cover.svg"
+import imgAuraGroundPreview from "./assets/alex-desktop/a4f17.png"
+import imgEditorialPhotograph2 from "./assets/alex-desktop/f7cda.png"
+import imgArrowUpRight from "./assets/alex-desktop/88ae1.svg"
+import imgArrowUpRight1 from "./assets/alex-desktop/774e5.svg"
+import imgStatusMarker from "./assets/alex-desktop/0c75b.svg"
+import imgArrowUpRight2 from "./assets/alex-desktop/6933d.svg"
+import imgArrowUpRight3 from "./assets/alex-desktop/bee23.svg"
 
 export default function AlexMorganDesktopPortfolio() {
   return (
@@ -150,9 +146,11 @@ export default function AlexMorganDesktopPortfolio() {
               src={imgRibbonSculpture}
               onError={(e) => {
                 const el = e.currentTarget
-                if (!el.dataset.fallback) {
-                  el.dataset.fallback = "1"
-                  el.src = "/assets/alex-desktop/a1df2.png"
+                const step = Number(el.dataset.fallbackStep || "0")
+                const fallbacks = ["./assets/alex-desktop/a1df2.png", "/assets/alex-desktop/a1df2.png", "assets/alex-desktop/a1df2.png"]
+                if (step < fallbacks.length) {
+                  el.dataset.fallbackStep = String(step + 1)
+                  el.src = fallbacks[step]
                 }
               }}
             />
@@ -297,9 +295,11 @@ export default function AlexMorganDesktopPortfolio() {
                 src={imgEditorialPhotograph}
                 onError={(e) => {
                   const el = e.currentTarget
-                  if (!el.dataset.fallback) {
-                    el.dataset.fallback = "1"
-                    el.src = "/image.png"
+                  const step = Number(el.dataset.fallbackStep || "0")
+                  const fallbacks = ["./image.png", "/image.png", "image.png"]
+                  if (step < fallbacks.length) {
+                    el.dataset.fallbackStep = String(step + 1)
+                    el.src = fallbacks[step]
                   }
                 }}
               />
